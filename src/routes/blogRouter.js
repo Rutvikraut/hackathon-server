@@ -6,10 +6,18 @@ import pool from '../db/configDb.js'
 const router = express.Router()
 
 
-router.get('/getCategory', (request, response) => {
+router.get('/getblogs', (request, response) => {
     const sql = `
-          SELECT categoryId, title, description
-          FROM categories 
+        SELECT b.blogId AS Id,
+        b.title AS Title,
+        c.title AS Category,
+        DATE_FORMAT(b.createdTimestamp, '%d-%m-%Y %r') AS Date,
+        u.full_name AS Author
+        FROM blogs b LEFT JOIN 
+        user u ON b.userId = u.userId
+        LEFT JOIN categories c ON b.categoryId = c.categoryId
+        ORDER BY b.createdTimestamp;
+
       `
     pool.query(sql, [request.userId], (error, tasks) => {
       response.send(result.createResult(error, tasks))
@@ -19,9 +27,9 @@ router.get('/getCategory', (request, response) => {
 
 router.post('/addblog',(req,res)=>{
     const { title, content, category_id} = req.body
-    console.log(req.userId)
+    console.log(req.headers)
     const sql = `INSERT INTO blogs(title,contents,categoryId,userId) VALUES(?,?,?,?) `
-    pool.query(sql, [title,content,category_id,req.headers.userId], (error, data) => {
+    pool.query(sql, [title,content,category_id,req.userId], (error, data) => {
         res.send(result.createResult(error, data))
     })
 })

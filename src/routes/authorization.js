@@ -8,8 +8,10 @@ function authorization(req, res, next) {
   else {
     const token = req.headers.token
     if (token) {
+        console.log("Token",token)
       try {
         const payload = jwt.verify(token, config.secret)
+        console.log(payload)
         req.userId = payload.userId
         next()
       } catch (e) {
