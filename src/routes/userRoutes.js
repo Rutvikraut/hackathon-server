@@ -17,6 +17,7 @@ router.post('/register',(req,res)=>{
 
 router.post('/login', (req, res) => {
     const { email, password } = req.body
+    console.log(req.body)
     const encryptedPassword = String(CryptoJS.SHA256(password))
     const sql = `SELECT * FROM user WHERE email = ? AND password = ?`
     pool.query(sql, [email, encryptedPassword], (error, data) => {
