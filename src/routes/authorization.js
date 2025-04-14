@@ -4,7 +4,7 @@ import result from '../utils/result.js'
 import config from '../utils/config.js'
 
 function authorization(req, res, next) {
-  if (req.url == '/user/register' || req.url == '/user/login') next()
+  if (req.url == '/register' || req.url == '/login') next()
   else {
     const token = req.headers.token
     if (token) {

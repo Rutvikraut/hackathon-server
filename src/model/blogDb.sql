@@ -1,4 +1,4 @@
-use database hackathon;
+use hackathon;
 
 create table blogs(
     blogId INT PRIMARY KEY AUTO_INCREMENT,

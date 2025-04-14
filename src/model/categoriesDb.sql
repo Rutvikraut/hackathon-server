@@ -1,4 +1,4 @@
-use database hackathon;
+use hackathon;
 
 create table categories(
     categoryId INT PRIMARY KEY AUTO_INCREMENT,

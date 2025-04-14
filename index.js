@@ -3,6 +3,7 @@ import cors from 'cors'
 import userRouter from './src/routes/userRoutes.js'
 import categoryRouter from './src/routes/category.js'
 import authorization from './src/routes/authorization.js'
+import blogRouter from './src/routes/blogRouter.js'
 
 
 const app = express()
@@ -13,6 +14,7 @@ app.use(authorization)
 
 app.use('/',userRouter)
 app.use('/',categoryRouter)
+app.use('/',blogRouter)
 
 app.listen(4000, 'localhost', () => {
     console.log('server started at port 4000')
