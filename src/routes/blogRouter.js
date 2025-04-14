@@ -19,9 +19,8 @@ router.get('/getCategory', (request, response) => {
 
 router.post('/addblog',(req,res)=>{
     const { title, content, category_id} = req.body
-    console.log(req.userId)
     const sql = `INSERT INTO blogs(title,contents,categoryId,userId) VALUES(?,?,?,?) `
-    pool.query(sql, [title,content,category_id,req.headers.userId], (error, data) => {
+    pool.query(sql, [title,content,category_id,req.userId], (error, data) => {
         res.send(result.createResult(error, data))
     })
 })
