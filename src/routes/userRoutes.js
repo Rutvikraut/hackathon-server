@@ -7,10 +7,10 @@ import config from '../utils/config.js'
 const router = express.Router()
 
 router.post('/register',(req,res)=>{
-    const { full_name,email,phone_no, password } = req.body
+    const { fullName,email,phone, password } = req.body
     const encryptedPassword = String(CryptoJS.SHA256(password))
     const sql = `INSERT INTO user(email, password,full_name, phone_no) VALUES(?,?,?,?)`
-    pool.query(sql, [ email, encryptedPassword,full_name, phone_no], (error, data) => {
+    pool.query(sql, [ email, encryptedPassword,fullName, phone], (error, data) => {
         res.send(result.createResult(error, data))
     })
 })
@@ -25,6 +25,7 @@ router.post('/login', (req, res) => {
                 const payload = {
                     userId: data[0].userId
                 }
+                console.log(payload)
                 const token = jwt.sign(payload, config.secret)
                 const body = {
                     token: token,
