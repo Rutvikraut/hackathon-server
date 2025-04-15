@@ -7,6 +7,6 @@ create table blogs(
     userId INT,
     categoryId INT,
     createdTimestamp DATETIME default CURRENT_TIMESTAMP,
-    FOREIGN KEY (userId) REFERENCES user(userId),
-    FOREIGN KEY (categoryId) REFERENCES categories(categoryId)
+    FOREIGN KEY (userId) REFERENCES user(userId) ON DELETE CASCADE,
+    FOREIGN KEY (categoryId) REFERENCES categories(categoryId) ON DELETE CASCADE
 );
